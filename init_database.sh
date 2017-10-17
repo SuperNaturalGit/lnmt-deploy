@@ -1,15 +1,21 @@
 #!/bin/bash
 
+#修改mysql配置，执行数据库初始化脚本
 Init_Database(){
-    #执行数据库初始化脚本
 
-    #重新覆盖一次mysql的配置文件。
-    #注意这个配置文件的内容要跟oneinstack中安装时的mysql安装目录和数据目录保持一致
-    if [ -e "./config/my.cnf" ];then
-        service mysqld stop
-        echo "Copy my.cnf"
-        \cp -f ./config/my.cnf /etc/
-        service mysqld start
+    if [ "${mysql_port_yn}" == "y" ]; then
+      #对外开放3306接口。需要兼容多个系统版本。
+      if [ "${OS}" == "CentOS" ]; then
+        if [ -z "$(grep -w '3306' /etc/sysconfig/iptables)" ]; then
+          iptables -I INPUT 5 -p tcp -m state --state NEW -m tcp --dport 3306 -j ACCEPT
+          service iptables save
+        fi
+      elif [[ "${OS}" =~ ^Ubuntu$|^Debian$ ]]; then
+        if [ -z "$(grep -w '3306' /etc/iptables.up.rules)" ]; then
+          iptables -I INPUT 5 -p tcp -m state --state NEW -m tcp --dport 3306 -j ACCEPT
+          iptables-save > /etc/iptables.up.rules
+        fi
+      fi
     fi
 
     #检查mysql是否正常启动，通过端口号和进程来检查
@@ -25,8 +31,10 @@ Init_Database(){
     #挨个执行sql目录下的初始化脚本
     for sql_file in `ls sql`
     do
-        #注意这里的root密码是之前安装mysql时输入的密码
-        mysql -uroot -pwafer <./sql/${sql_file}
+      mysql -uroot -p${dbrootpwd} <./sql/${sql_file}
+      if [ "$?" -ne 0 ]; then
+        exit 1
+      fi
     done
 }
 

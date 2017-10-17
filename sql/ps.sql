@@ -15,6 +15,8 @@ MySQL - 5.5.25 : Database - ps
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`ps` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
+grant all privileges on ps.* to wafer@'%' identified by 'wafer';
+
 USE `ps`;
 
 /*Table structure for table `atemp` */
