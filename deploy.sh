@@ -4,13 +4,11 @@ export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/lo
 clear
 
 . ./oneinstack/options.conf
-. ./check_process.sh
 . ./collect_deploy_info.sh
 . ./check_services.sh
-. ./init_database.sh
-. ./deploy_pro.sh
-. ./init_config.sh
-
+. ./deploy_nginx.sh
+. ./deploy_mysql.sh
+. ./deploy_tomcat.sh
 
 
 cd oneinstack
@@ -23,13 +21,14 @@ cd ..
 
 Collect_Deploy_Info
 
-Start_Services
+Check_Services_Ready
 
-Init_Config
+Deploy_MySQL
 
-[ "${init_datebase_yn}" == "y" ] && Init_Database
+Deploy_Tomcat
 
-[ "${need_tomcat_yn}" == "y" ] && Deploy_Pro
+Deploy_Nginx
+
 
 
 

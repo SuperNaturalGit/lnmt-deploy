@@ -22,15 +22,15 @@ Collect_Deploy_Info(){
 
   #是否在本机初始化项目数据（执行mysql脚本）
   while :; do echo
-    read -p "Do you want to initialize the database for your project(MySQL)? [y/n]: " init_datebase_yn
-    if [[ ! $init_datebase_yn =~ ^[y,n]$ ]]; then
+    read -p "Do you want to initialize the database for your project(MySQL)? [y/n]: " init_database_yn
+    if [[ ! $init_database_yn =~ ^[y,n]$ ]]; then
       echo "Input error! Please only input 'y' or 'n'"
     else
       break
     fi
   done
 
-  if [[ "${init_datebase_yn}" == "y" ]]; then
+  if [[ "${init_database_yn}" == "y" ]]; then
     #是否开放3306端口号
     while :; do echo
       read -p "Do you want to open the 3306 port for MySQL? [y/n]: " mysql_port_yn
