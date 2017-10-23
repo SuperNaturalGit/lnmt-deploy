@@ -4,21 +4,24 @@
 Check_Services_Exists(){
     #检查mysql的进程是否已经存在
     mysql_process_count=`ps -ef | grep mysql | grep -v grep | wc -l`
-    if [ "${mysql_process_count}" -ne 0 ]; then
+    mysql_service_count=`service mysqld status | grep -v grep | wc -l`
+    if [[ ${mysql_process_count} -ne 0 ]] || [[ ${mysql_service_count} -ne 0 ]]; then
         echo "The mysql service is already exist, please uninstall it before run this script."
         exit 1
     fi
 
     #检查nginx进程是否已经存在
     nginx_process_count=`ps -ef | grep nginx | grep -v grep | wc -l`
-    if [ "${nginx_process_count}" -ne 0 ]; then
+    nginx_service_count=`service nginx status | grep -v grep | wc -l`
+    if [ "${nginx_process_count}" -ne 0 ] || [[ ${nginx_service_count} -ne 0 ]]; then
         echo "The nginx service is already exist, please uninstall it before run this script."
         exit 1
     fi
 
     #检查tomcat进程是否已经存在
     tomcat_process_count=`ps -ef | grep tomcat | grep -v grep | wc -l`
-    if [ "${tomcat_process_count}" -ne 0 ]; then
+    tomcat_service_count=`service tomcat status | grep -v grep | wc -l`
+    if [[ "${tomcat_process_count}" -ne 0 ]] || [[ ${tomcat_service_count} -ne 0 ]]; then
         echo "The tomcat service is already exist, please uninstall it before run this script."
         exit 1
     fi

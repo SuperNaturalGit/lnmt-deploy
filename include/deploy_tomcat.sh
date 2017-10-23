@@ -8,7 +8,7 @@ Deploy_Tomcat(){
     [ -e "./config/tomcat/server.xml" ] && \cp -f ./config/tomcat/server.xml ${tomcat_install_dir}/conf/
 
     #部署项目
-    war_list=`find ./war -name "*.war"`
+    war_list=`find ./app -name "*.war"`
     if [ ${#war_list[*]} -lt 1 ]; then
       echo "Can't find any war package!"
       exit 1

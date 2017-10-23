@@ -4,11 +4,11 @@ export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/lo
 clear
 
 . ./oneinstack/options.conf
-. ./collect_deploy_info.sh
-. ./check_services.sh
-. ./deploy_nginx.sh
-. ./deploy_mysql.sh
-. ./deploy_tomcat.sh
+. include/collect_deploy_info.sh
+. include/check_services.sh
+. include/deploy_nginx.sh
+. include/deploy_mysql.sh
+. include/deploy_tomcat.sh
 
 
 cd oneinstack
