@@ -15,8 +15,8 @@ Deploy_Tomcat(){
     else
       for war in ${war_list}
       do
-        #${war}是查找到的war文件的相对路径。wwwroot_dir是网站根目录，在安装时设置的。
-        \cp -f "${war}" "${wwwroot_dir}/default"
+        #${war}是查找到的war文件的相对路径。copy到tomcat的webapp目录下。
+        \cp -f "${war}" "${tomcat_install_dir}/tomcat/webapps"
       done
     fi
     service tomcat start

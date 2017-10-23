@@ -10,7 +10,7 @@ Check_Services_Exists
 #调用oneinstack安装各个应用
 cd oneinstack
 . ./install.sh
-#cd ..
+cd ..
 
 
 
