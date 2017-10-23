@@ -16,7 +16,7 @@ Deploy_Tomcat(){
       for war in ${war_list}
       do
         #${war}是查找到的war文件的相对路径。copy到tomcat的webapp目录下。
-        \cp -f "${war}" "${tomcat_install_dir}/tomcat/webapps"
+        \cp -f "${war}" "${tomcat_install_dir}/webapps"
       done
     fi
     service tomcat start
