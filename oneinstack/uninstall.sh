@@ -43,9 +43,11 @@ ${CMSG}memcached${CEND}      --->Uninstall Memcached
 }
 
 Uninstall_status() {
-  while :; do echo
-    read -p "Do you want to uninstall? [y/n]: " uninstall_yn
-    echo
+  while :; do
+#    echo
+#    read -p "Do you want to uninstall? [y/n]: " uninstall_yn
+#    echo
+    uninstall_yn=y
     if [[ ! ${uninstall_yn} =~ ^[y,n]$ ]]; then
       echo "${CWARNING}input error! Please only input 'y' or 'n'${CEND}"
     else
@@ -65,11 +67,11 @@ Print_web() {
   [ -d "${openresty_install_dir}" ] && echo "${openresty_install_dir}"
   [ -e "/etc/init.d/nginx" ] && echo '/etc/init.d/nginx'
   [ -e "/etc/logrotate.d/nginx" ] && echo '/etc/logrotate.d/nginx'
-  
+
   [ -d "${apache_install_dir}" ] && echo "${apache_install_dir}"
   [ -e "/etc/init.d/httpd" ] && echo "/etc/init.d/httpd"
   [ -e "/etc/logrotate.d/apache" ] && echo "/etc/logrotate.d/apache"
-  
+
   [ -d "${tomcat_install_dir}" ] && echo "${tomcat_install_dir}"
   [ -e "/etc/init.d/tomcat" ] && echo "/etc/init.d/tomcat"
   [ -e "/etc/logrotate.d/tomcat" ] && echo "/etc/logrotate.d/tomcat"

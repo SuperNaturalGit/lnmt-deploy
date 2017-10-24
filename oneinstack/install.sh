@@ -41,6 +41,7 @@ if [ -e "/etc/ssh/sshd_config" ]; then
   while :; do
 #    echo
 #    read -p "Please input SSH port(Default: $ssh_port): " SSH_PORT
+    SSH_PORT=22
     [ -z "$SSH_PORT" ] && SSH_PORT=$ssh_port
     if [ $SSH_PORT -eq 22 >/dev/null 2>&1 -o $SSH_PORT -gt 1024 >/dev/null 2>&1 -a $SSH_PORT -lt 65535 >/dev/null 2>&1 ]; then
       break
@@ -61,6 +62,7 @@ fi
 while :; do
 #  echo
 #  read -p "Do you want to enable iptables? [y/n]: " iptables_yn
+  iptables_yn=y
   if [[ ! $iptables_yn =~ ^[y,n]$ ]]; then
     echo "${CWARNING}input error! Please only input 'y' or 'n'${CEND}"
     exit 1
@@ -106,6 +108,7 @@ while :; do
 #        echo -e "\t${CMSG}2${CEND}. Install Apache-2.2"
 #        echo -e "\t${CMSG}3${CEND}. Do not install"
 #        read -p "Please input a number:(Default 3 press Enter) " Apache_version
+        Apache_version=3
         [ -z "$Apache_version" ] && Apache_version=3
         if [[ ! $Apache_version =~ ^[1-3]$ ]]; then
           echo "${CWARNING}input error! Please only input number 1,2,3${CEND}"
@@ -224,6 +227,7 @@ while :; do
 #              echo -e "\t${CMSG}1${CEND}. Install database from binary package."
 #              echo -e "\t${CMSG}2${CEND}. Install database from source package."
 #              read -p "Please input a number:(Default 1 press Enter) " dbInstallMethods
+              dbInstallMethods=1
               [ -z "$dbInstallMethods" ] && dbInstallMethods=1
               if [[ ! $dbInstallMethods =~ ^[1-2]$ ]]; then
                 echo "${CWARNING}input error! Please only input number 1,2${CEND}"
@@ -248,6 +252,7 @@ done
 while :; do
 #  echo
 #  read -p "Do you want to install PHP? [y/n]: " PHP_yn
+  PHP_yn=n
   if [[ ! $PHP_yn =~ ^[y,n]$ ]]; then
     echo "${CWARNING}input error! Please only input 'y' or 'n'${CEND}"
   else
@@ -417,6 +422,7 @@ done
 while :; do
 #  echo
 #  read -p "Do you want to install Pure-FTPd? [y/n]: " FTP_yn
+  FTP_yn=n
   if [[ ! $FTP_yn =~ ^[y,n]$ ]]; then
     echo "${CWARNING}input error! Please only input 'y' or 'n'${CEND}"
   else
@@ -453,6 +459,7 @@ done
 while :; do
 #  echo
 #  read -p "Do you want to install memcached? [y/n]: " memcached_yn
+  memcached_yn=n
   if [[ ! $memcached_yn =~ ^[y,n]$ ]]; then
     echo "${CWARNING}input error! Please only input 'y' or 'n'${CEND}"
   else
@@ -463,6 +470,7 @@ done
 while :; do
 #  echo
 #  read -p "Do you want to install HHVM? [y/n]: " HHVM_yn
+  HHVM_yn=n
   if [[ ! $HHVM_yn =~ ^[y,n]$ ]]; then
     echo "${CWARNING}input error! Please only input 'y' or 'n'${CEND}"
   else
