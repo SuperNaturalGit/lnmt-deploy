@@ -1,8 +1,9 @@
 记录oneinstack代码的修改点
-install.sh:
+oneinstack/install.sh:
 1、引入lnmt.conf
 2、SSH_PORT、iptables_yn、Apache_version、dbInstallMethods、PHP_yn、FTP_yn、memcached_yn、HHVM_yn这些选项都写死在了代码中
-3、Web_yn、Nginx_version、Tomcat_version、JDK_version、DB_yn、DB_version、dbrootpwd、redis_yn这些选项修改成可配置的
+3、Web_yn、Nginx_version、Tomcat_version、JDK_version、dbrootpwd、redis_yn这些选项修改成可配置的
+4、DB_version取值范围更改，DB_yn由DB_version的值决定是y还是n
 
-uninstall.sh:
+oneinstack/uninstall.sh:
 1、uninstall_yn

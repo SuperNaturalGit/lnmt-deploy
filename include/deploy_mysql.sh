@@ -5,7 +5,7 @@ Deploy_MySQL(){
 
   #重新覆盖一次mysql的配置文件。
   #注意这个配置文件的内容要跟oneinstack中安装时的mysql安装目录和数据目录保持一致
-  if [[ ${init_database_yn} == "y" ]]; then
+  if [[ ${need_mysql_yn} == "y" ]]; then
     echo "Start to init config for mysql."
     #覆盖配置文件
     [ -e "./config/mysql/my.cnf" ] && \cp -f ./config/mysql/my.cnf /etc/

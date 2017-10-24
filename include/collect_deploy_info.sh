@@ -27,8 +27,8 @@ Collect_Deploy_Info(){
   #是否在本机初始化项目数据（执行mysql脚本）
   while :; do
 #    echo
-#    read -p "Do you want to initialize the database for your project(MySQL)? [y/n]: " init_database_yn
-    if [[ ! $init_database_yn =~ ^[y,n]$ ]]; then
+#    read -p "Do you want to initialize the database for your project(MySQL)? [y/n]: " need_mysql_yn
+    if [[ ! $need_mysql_yn =~ ^[y,n]$ ]]; then
       echo "Input error! Please only input 'y' or 'n'"
       exit 1
     else
@@ -36,7 +36,7 @@ Collect_Deploy_Info(){
     fi
   done
 
-  if [[ "${init_database_yn}" == "y" ]]; then
+  if [[ "${need_mysql_yn}" == "y" ]]; then
     #是否开放3306端口号
     while :; do
 #      echo

@@ -188,9 +188,19 @@ while :; do
 done
 
 # choice database
+if [[ ! ${DB_version} =~ ^[1-4]$ ]]; then
+  echo "${CWARNING}DB_version input error! Please only input number 1,2,3,4${CEND}"
+  exit 1
+elif [[ ${DB_version} -eq 4 ]]; then
+  DB_yn=n
+else
+  DB_yn=y
+fi
+
 while :; do
 #  echo
 #  read -p "Do you want to install Database? [y/n]: " DB_yn
+
   if [[ ! $DB_yn =~ ^[y,n]$ ]]; then
     echo "${CWARNING}input error! Please only input 'y' or 'n'${CEND}"
     exit 1

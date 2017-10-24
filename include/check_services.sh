@@ -66,7 +66,7 @@ Check_Services_Ready(){
   fi
 
   #如果数据库也安装在本机，需要检查mysql服务是否已安装
-  if [ ${init_database_yn} == "y" ]; then
+  if [ ${need_mysql_yn} == "y" ]; then
     Check_Exists mysqld
     if [[ $? -ne 0 ]]; then
       echo "The mysql service is not ready, please check whether you have installed this service."
