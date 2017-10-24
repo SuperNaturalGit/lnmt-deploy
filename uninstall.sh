@@ -2,15 +2,15 @@
 
 . ./lnmt.conf
 
-cd ./oneinstack
+cd oneinstack
 if [[ ${uninstall_web_yn} == "y" ]]; then
-  ./uninstall.sh web
+  . ./uninstall.sh web
 fi
 
 if [[ ${uninstall_mysql_yn} == "y" ]]; then
-   ./uninstall.sh db
+   . ./uninstall.sh db
+fi
 cd ..
 
 #更新有变动的服务
 systemctl daemon-reload
-
