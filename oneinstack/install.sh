@@ -9,7 +9,6 @@
 #       https://github.com/lj2007331/oneinstack
 
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-clear
 printf "
 #######################################################################
 #       OneinStack for CentOS/RadHat 6+ Debian 7+ and Ubuntu 12+      #
@@ -72,6 +71,13 @@ while :; do
 done
 
 # check Web server
+
+if [[ ${Nginx_version} -eq 1 ]] || [[ ${Tomcat_version} =~ ^[1-3]$ ]]; then
+  Web_yn=y
+else
+  Web_yn=n
+fi
+
 while :; do
 #  echo
 #  read -p "Do you want to install Web server? [y/n]: " Web_yn
@@ -193,6 +199,7 @@ if [[ ! ${DB_version} =~ ^[1-4]$ ]]; then
   exit 1
 elif [[ ${DB_version} -eq 4 ]]; then
   DB_yn=n
+  DB_version=12
 else
   DB_yn=y
 fi
@@ -726,20 +733,23 @@ case "${Nginx_version}" in
 esac
 
 # JDK
-case "${JDK_version}" in
-  1)
-    . include/jdk-1.8.sh
-    Install-JDK18 2>&1 | tee -a ${oneinstack_dir}/install.log
-    ;;
-  2)
-    . include/jdk-1.7.sh
-    Install-JDK17 2>&1 | tee -a ${oneinstack_dir}/install.log
-    ;;
-  3)
-    . include/jdk-1.6.sh
-    Install-JDK16 2>&1 | tee -a ${oneinstack_dir}/install.log
-    ;;
-esac
+if [[ ${Tomcat_version} =~ ^[1-3]$ ]]; then
+  case "${JDK_version}" in
+    1)
+      . include/jdk-1.8.sh
+      Install-JDK18 2>&1 | tee -a ${oneinstack_dir}/install.log
+      ;;
+    2)
+      . include/jdk-1.7.sh
+      Install-JDK17 2>&1 | tee -a ${oneinstack_dir}/install.log
+      ;;
+    3)
+      . include/jdk-1.6.sh
+      Install-JDK16 2>&1 | tee -a ${oneinstack_dir}/install.log
+      ;;
+  esac
+fi
+
 
 case "${Tomcat_version}" in
   1)

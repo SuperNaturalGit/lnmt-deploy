@@ -9,14 +9,13 @@
 #       https://github.com/lj2007331/oneinstack
 
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-clear
-printf "
-#######################################################################
-#       OneinStack for CentOS/RadHat 6+ Debian 7+ and Ubuntu 12+      #
-#                         Uninstall OneinStack                        #
-#       For more information please visit https://oneinstack.com      #
-#######################################################################
-"
+#printf "
+########################################################################
+##       OneinStack for CentOS/RadHat 6+ Debian 7+ and Ubuntu 12+      #
+##                         Uninstall OneinStack                        #
+##       For more information please visit https://oneinstack.com      #
+########################################################################
+#"
 
 . ./options.conf
 . ./include/color.sh
@@ -58,7 +57,7 @@ Uninstall_status() {
 
 Print_Warn() {
   echo
-  echo "${CWARNING}You will uninstall OneinStack, Please backup your configure files and DB data! ${CEND}"
+#  echo "${CWARNING}You will uninstall OneinStack, Please backup your configure files and DB data! ${CEND}"
 }
 
 Print_web() {
@@ -90,7 +89,7 @@ Uninstall_Web() {
   sed -i 's@^website_name=.*@website_name=@' ./options.conf
   sed -i 's@^local_bankup_yn=.*@local_bankup_yn=y@' ./options.conf
   sed -i 's@^remote_bankup_yn=.*@remote_bankup_yn=n@' ./options.conf
-  echo "${CMSG}Web uninstall completed${CEND}"
+  echo "${CMSG}Nginx/Tomcat uninstall completed${CEND}"
 }
 
 Print_DB() {
@@ -105,7 +104,7 @@ Uninstall_DB() {
   [ -e "${db_data_dir}" ] && /bin/mv ${db_data_dir}{,$(date +%Y%m%d%H)}
   sed -i 's@^dbrootpwd=.*@dbrootpwd=@' ./options.conf
   sed -i "s@${db_install_dir}/bin:@@" /etc/profile
-  echo "${CMSG}DB uninstall completed${CEND}"
+  echo "${CMSG}MySQL uninstall completed${CEND}"
 }
 
 Print_PHP() {

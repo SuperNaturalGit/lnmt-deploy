@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#检查某一项服务是否存在
+#检查某一项服务是否存在，0表示存在，1表示不存在
 Check_Exists(){
   process=$1
   process_count=`ps -ef |grep ${process} | grep -v grep | wc -l`
@@ -8,9 +8,18 @@ Check_Exists(){
     return 0
   fi
 
-  service_count=`service ${process} status | grep -v grep | wc -l`
+  if [[ ${OS} == "CentOS" ]] && [[ ${CentOS_RHEL_version} -eq 7 ]]; then
+    service_count=`systemctl status ${process} | grep -v grep | wc -l`
+  else
+    service_count=`service ${process} status | grep -v grep | wc -l`
+  fi
+
   if [[ ${service_count} -ne 0 ]]; then
-    service_notfound_count=`service ${process} status | grep not-found | wc -l`
+    if [[ ${OS} == "CentOS" ]] && [[ ${CentOS_RHEL_version} -eq 7 ]]; then
+      service_notfound_count=`systemctl status ${process} | grep not-found | wc -l`
+    else
+      service_notfound_count=`service ${process} status | grep not-found | wc -l`
+    fi
     if [[ ${service_notfound_count} -eq 0 ]]; then
       return 0
     else

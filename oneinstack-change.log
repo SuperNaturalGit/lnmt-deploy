@@ -6,4 +6,8 @@ oneinstack/install.sh:
 4、DB_version取值范围更改，DB_yn由DB_version的值决定是y还是n
 
 oneinstack/uninstall.sh:
-1、uninstall_yn
+1、uninstall_yn在代码中写死
+2、注释掉oneinstack的卸载提示语
+3、注释掉oneinstack的卸载警告：You will uninstall OneinStack....
+4、“Web uninstall completed”修改
+5、“DB uninstall completed”修改

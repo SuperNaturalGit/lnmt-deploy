@@ -6,14 +6,11 @@ clear
 . ./oneinstack/options.conf
 . lnmt.conf
 . include/collect_deploy_info.sh
+. ./include/check_os.sh
 . include/check_services.sh
 . include/deploy_nginx.sh
 . include/deploy_mysql.sh
 . include/deploy_tomcat.sh
-
-cd oneinstack
-. ./include/check_os.sh
-cd ..
 
 #
 # Check if user is root
