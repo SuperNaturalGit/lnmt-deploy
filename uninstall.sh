@@ -35,5 +35,7 @@ if [[ ${uninstall_mysql_yn} == "y" ]]; then
   fi
 fi
 
-#更新有变动的服务
-systemctl daemon-reload
+#重启系统来清除对应的服务
+echo "Please restart the server and see if the services has been stopped."
+read -p "Press any key to restart OS..." restart_yn
+reboot

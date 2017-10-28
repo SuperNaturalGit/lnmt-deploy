@@ -839,13 +839,15 @@ echo "Total OneinStack Install Time: ${CQUESTION}${installTime}${CEND} minutes"
 [ "${redis_yn}" == 'y' ] && echo -e "\n$(printf "%-32s" "redis install dir:")${CMSG}${redis_install_dir}${CEND}"
 [ "${memcached_yn}" == 'y' ] && echo -e "\n$(printf "%-32s" "memcached install dir:")${CMSG}${memcached_install_dir}${CEND}"
 [ "${Web_yn}" == 'y' ] && echo -e "\n$(printf "%-32s" "index url:")${CMSG}http://${IPADDR}/${CEND}"
-while :; do echo
-  echo "${CMSG}Please restart the server and see if the services start up fine.${CEND}"
-  read -p "Do you want to restart OS ? [y/n]: " restart_yn
-  if [[ ! "${restart_yn}" =~ ^[y,n]$ ]]; then
-    echo "${CWARNING}input error! Please only input 'y' or 'n'${CEND}"
-  else
-    break
-  fi
-done
-[ "${restart_yn}" == 'y' ] && reboot
+#while :; do echo
+#  echo "${CMSG}Please restart the server and see if the services start up fine.${CEND}"
+#  read -p "Press any key to restart OS..." restart_yn
+#  if [[ ! "${restart_yn}" =~ ^[y,n]$ ]]; then
+#    echo "${CWARNING}input error! Please only input 'y' or 'n'${CEND}"
+#  else
+#    break
+#  fi
+#done
+echo "${CMSG}Please restart the server and see if the services start up fine.${CEND}"
+read -p "Press any key to restart OS..." restart_yn
+reboot
