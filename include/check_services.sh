@@ -32,25 +32,41 @@ Check_Exists(){
 #在安装应用之前，检查系统中是否已经有已启动的相关服务
 Check_Services_Exists(){
     #检查mysql的服务已经存在
-    Check_Exists mysqld
-    if [[ $? -eq 0 ]]; then
-      echo "The mysql service is already exist, please uninstall it before run this script."
-      exit 1
+    if [[ ${DB_version} =~ ^[1-3]$ ]]; then
+      Check_Exists mysqld
+      if [[ $? -eq 0 ]]; then
+        echo "The mysql service is already exist, please uninstall it before run this script."
+        exit 1
+      fi
     fi
 
     #检查nginx的服务已经存在
-    Check_Exists nginx
-    if [[ $? -eq 0 ]]; then
-      echo "The nginx service is already exist, please uninstall it before run this script."
-      exit 1
+    if [[ ${Nginx_version} -eq 1 ]]; then
+      Check_Exists nginx
+      if [[ $? -eq 0 ]]; then
+        echo "The nginx service is already exist, please uninstall it before run this script."
+        exit 1
+      fi
     fi
 
     #检查tomcat的服务已经存在
-    Check_Exists tomcat
-    if [[ $? -eq 0 ]]; then
-      echo "The tomcat service is already exist, please uninstall it before run this script."
-      exit 1
+    if [[ ${Tomcat_version} =~ ^[1-3]$ ]]; then
+      Check_Exists tomcat
+      if [[ $? -eq 0 ]]; then
+        echo "The tomcat service is already exist, please uninstall it before run this script."
+        exit 1
+      fi
     fi
+
+    #检查redis的服务是否已经存在
+    if [[ ${redis_yn} == "y" ]]; then
+      Check_Exists redis
+      if [[ $? -eq 0 ]]; then
+        echo "The redis service is already exist, please uninstall it before run this script."
+        exit 1
+      fi
+    fi
+
 }
 
 #部署项目之前，检查项目相关的服务是否已经准备就绪。
