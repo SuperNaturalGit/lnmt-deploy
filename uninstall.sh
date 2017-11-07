@@ -35,6 +35,16 @@ if [[ ${uninstall_mysql_yn} == "y" ]]; then
   fi
 fi
 
+if [[ ${uninstall_redis_yn} == "y" ]]; then
+  Check_Exists redis;
+  if [[ $? -eq 0 ]]; then
+    echo "Redis will be uninstalled..."
+    cd oneinstack
+    . ./uninstall.sh redis
+    cd ..
+  fi
+fi
+
 #重启系统来清除对应的服务
 echo "Please restart the server and see if the services has been stopped."
 read -p "Press any key to restart OS..." restart_yn
